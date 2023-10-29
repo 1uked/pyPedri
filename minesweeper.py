@@ -49,11 +49,22 @@ class Minesweeper:
                 if self.board[y][x] == 0:
                     new_board[y][x] = -1 * sum"""
 
-    def print_board(self) -> None:
+    """def print_board(self) -> None:
         for i in range(self.height):
             print('\n', end='')
             for column in range(self.width):
-                print(self.board[i][column], end='\t')
+                print(self.board[i][column], end='\t')"""
+
+    def print_board(self):
+        print('   ', end='')
+        for i in range(self.width):
+            print(f'{i} ', end='')
+        print('\n   ' + '--' * self.width)
+        for i in range(self.height):
+            print(f'{i} |', end=' ')
+            for j in range(self.width):
+                print(self.board[i][j], end=' ')
+            print()
 
     def reveal(self, x, y) -> bool:
         if self.hidden_board[y][x] == 'X':
