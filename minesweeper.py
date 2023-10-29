@@ -15,6 +15,7 @@ class Minesweeper:
         self.time = time.time()
         self.scoreboard = {}
         self.click_count = 0
+        self.flags = set()
 
     def populate_board(self, first_x, first_y):
         mine_count = 0
@@ -45,7 +46,10 @@ class Minesweeper:
         for i in range(self.height):
             print(f'{i} |', end=' ')
             for j in range(self.width):
-                print(self.board[i][j], end=' ')
+                if (j, i) in self.flags:
+                    print('F', end=' ')
+                else:
+                    print(self.board[i][j], end=' ')
             print()
 
     def reveal(self, x, y):
@@ -64,6 +68,15 @@ class Minesweeper:
                         if self.board[i][j] == 'Z':
                             self.reveal(j, i)
         return True
+
+    def set_flag(self, x, y):
+        if self.board[y][x] == 'Z':
+            if (x, y) in self.flags:
+                self.flags.remove((x, y))
+            else:
+                self.flags.add((x, y))
+            return True
+        return False
 
     def set_inputs(self, x, y):
         if not self.reveal(x, y):
