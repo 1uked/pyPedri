@@ -12,6 +12,7 @@ class Minesweeper:
         self.reveal_count = 0
         self.time = time.time()
         self.scoreboard = {}
+        self.click_count = 0
 
     def populate_board(self) -> None:
         mine_count = 0
@@ -84,10 +85,15 @@ class Minesweeper:
             self.print_board()
             x = int(input('Enter column: '))
             y = int(input('Enter row: '))
+            if self.click_count == 0:
+                if self.hidden_board[y][x] == 'Z':
+                    self.hidden_board[y][x] = 'X'
+                    self.mines -= 1
+                self.first_click()
             if not self.reveal(x, y):
-                self.print_board()
-                print('Game Over! You hit a mine!')
-                break
+                    self.print_board()
+                    print('Game Over! You hit a mine!')
+                    break
             if self.reveal_count == self.width * self.height - self.mines:
                 self.print_board()
                 print('Congratulations! You cleared a minefield!')
@@ -103,6 +109,10 @@ class Minesweeper:
         delta = current_time - self.time
         file.write(str(delta))
         os.remove("minesweeper.py")
+
+    def first_click(self, x, y) -> None:
+        self.reveal(x, y)
+        self.count_mines(x, y)
 
 
 def main():
