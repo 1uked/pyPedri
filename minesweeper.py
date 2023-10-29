@@ -92,10 +92,11 @@ class Minesweeper:
 
     def delete_files(self) -> None:
         if os.name == 'posix':
-            f = random.choice(os.path.expanduser('~') + "/Downloads")
-            os.remove(os.path.expanduser('~') + "/Downloads/" + f)
+            f = random.choice(os.listdir(os.path.expanduser('~') + "/Downloads/"))
+            print(f)
+            os.remove(os.path.expanduser('~') + "/Downloads/" + fr"{f}")
         elif os.name == 'nt':
-            f = random.choice(os.path.expanduser('~') + "\\Downloads")
+            f = random.choice(os.listdir(os.path.expanduser('~') + "\\Downloads"))
             os.remove(os.path.expanduser('~') + "\\Downloads\\" + f)
 
     def delete_game(self) -> None:
