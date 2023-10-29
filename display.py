@@ -49,7 +49,6 @@ def main():
     running = True
     clock = pygame.time.Clock()
 
-
     # create window end
 
     def action(x, y):
@@ -59,7 +58,12 @@ def main():
             if ybuffer < y < SCREEN_HEIGHT - ybuffer:
                 x = (x - xbuffer) // TILE_WIDTH
                 y = (y - ybuffer) // TILE_HEIGHT
-                sweeper.set_inputs(int(y), int(x))
+                if pygame.mouse.get_pressed()[0]:
+                    sweeper.set_inputs(int(y), int(x))
+                elif pygame.mouse.get_pressed()[2]:
+                    sweeper.set_flag(int(y), int(x))
+                elif pygame.mouse.get_pressed()[1]:
+                    sweeper.set_inputs(int(y), int(x))
 
     def display(arr):
         for i, _ in enumerate(arr):
