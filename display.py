@@ -14,8 +14,8 @@ def main():
     SCREEN_WIDTH = 800
     SCREEN_HEIGHT = 600
 
-    BOARD_WIDTH = 500
-    BOARD_HEIGHT = 500
+    BOARD_WIDTH = 450
+    BOARD_HEIGHT = 450
 
     TILE_WIDTH = BOARD_WIDTH / TILES
     TILE_HEIGHT = BOARD_HEIGHT / TILES
@@ -24,7 +24,8 @@ def main():
     pygame.display.set_caption("Peridox")
 
     programIcon = pygame.image.load('Data/icon.png')
-    bg = pygame.image.load("Data/bg2.png")
+    bg = pygame.image.load("Data/bg.png")
+    fg = pygame.image.load("Data/fg.png")
 
     # import tiles
     tiles = [0] * 9
@@ -33,16 +34,15 @@ def main():
         tiles[i] = pygame.transform.scale(tiles[i], (TILE_WIDTH, TILE_HEIGHT))
 
     tile_bomb = pygame.image.load("Data/Tiles/tile_mine.png")
-    tile_plain = pygame.image.load("Data/Tiles/tile_plain2.png")
-    tile_wrong = pygame.image.load("Data/Tiles/tile_wrong.png")
+    tile_plain = pygame.image.load("Data/Tiles/tile_plain.png")
     tile_flag = pygame.image.load("Data/Tiles/tile_flag_.png")
 
     tile_bomb = pygame.transform.scale(tile_bomb, (TILE_WIDTH, TILE_HEIGHT))
     tile_plain = pygame.transform.scale(tile_plain, (TILE_WIDTH, TILE_HEIGHT))
-    tile_wrong = pygame.transform.scale(tile_wrong, (TILE_WIDTH, TILE_HEIGHT))
     tile_flag = pygame.transform.scale(tile_flag, (TILE_WIDTH, TILE_HEIGHT))
 
     bg = pygame.transform.scale(bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
+    fg = pygame.transform.scale(fg, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
     pygame.display.set_icon(programIcon)
 
@@ -84,6 +84,8 @@ def main():
         screen.blit(bg, (0, 0))
 
         display(sweeper.board)
+
+        screen.blit(fg, (0, 0))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
