@@ -86,8 +86,8 @@ class Minesweeper:
             x = int(input('Enter column: '))
             y = int(input('Enter row: '))
             if self.click_count == 0:
-                if self.hidden_board[y][x] == 'Z':
-                    self.hidden_board[y][x] = 'X'
+                if self.hidden_board[y][x] == 'X':
+                    self.hidden_board[y][x] = '0'
                     self.mines -= 1
             if not self.reveal(x, y):
                     self.print_board()
