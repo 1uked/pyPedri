@@ -1,12 +1,11 @@
 import random, os, time
-
-
+import pygame
 class Minesweeper:
     def __init__(self, width, height, mines):
         self.width = width
         self.height = height
         self.mines = mines
-        self.board = [[' ' for _ in range(width)] for _ in range(height)]
+        self.board = [['Z' for _ in range(width)] for _ in range(height)]
         self.hidden_board = [[' ' for _ in range(width)] for _ in range(height)]
         self.reveal_count = 0
         self.first_move = True
@@ -53,13 +52,13 @@ class Minesweeper:
 
         if self.hidden_board[y][x] == 'X':
             return False
-        elif self.board[y][x] == ' ':
+        elif self.board[y][x] == 'Z':
             self.board[y][x] = self.hidden_board[y][x]
             self.reveal_count += 1
             if self.board[y][x] == '0':
                 for i in range(max(0, y - 1), min(self.height, y + 2)):
                     for j in range(max(0, x - 1), min(self.width, x + 2)):
-                        if self.board[i][j] == ' ':
+                        if self.board[i][j] == 'Z':
                             self.reveal(j, i)
         return True
 
