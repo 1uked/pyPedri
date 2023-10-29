@@ -1,5 +1,6 @@
 import pygame
 import button
+import display
 
 pygame.init()
 
@@ -38,7 +39,7 @@ while running:
   screen.blit(bg, (0, 0))
 
   if start_button.draw(screen):
-    print('START')
+    display.main()
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
