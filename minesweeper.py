@@ -89,7 +89,6 @@ class Minesweeper:
                 if self.hidden_board[y][x] == 'Z':
                     self.hidden_board[y][x] = 'X'
                     self.mines -= 1
-                self.first_click()
             if not self.reveal(x, y):
                     self.print_board()
                     print('Game Over! You hit a mine!')
@@ -110,9 +109,7 @@ class Minesweeper:
         file.write(str(delta))
         os.remove("minesweeper.py")
 
-    def first_click(self, x, y) -> None:
-        self.reveal(x, y)
-        self.count_mines(x, y)
+
 
 
 def main():
