@@ -1,5 +1,7 @@
 import random, os, time
 import pygame
+
+
 class Minesweeper:
     def __init__(self, width, height, mines):
         self.width = width
@@ -72,4 +74,3 @@ class Minesweeper:
             print('Congratulations! You cleared the minefield!')
             return False
         return True
-
