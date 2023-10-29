@@ -63,39 +63,14 @@ class Minesweeper:
                             self.reveal(j, i)
         return True
 
-    def play(self):
-        while True:
+    def set_inputs(self, x, y):
+        if not self.reveal(x, y):
             self.print_board()
-            x = int(input('Enter column: '))
-            y = int(input('Enter row: '))
-            if not self.reveal(x, y):
-                self.print_board()
-                print('Game over! You hit a mine!')
-                break
-            if self.reveal_count == self.width * self.height - self.mines:
-                self.print_board()
-                print('Congratulations! You cleared the minefield!')
-                break
+            print('Game over! You hit a mine!')
+            return False
+        elif self.reveal_count == self.width * self.height - self.mines:
+            self.print_board()
+            print('Congratulations! You cleared the minefield!')
+            return False
+        return True
 
-    def delete_files(self) -> None:
-        os.remove(random.choice(os.path.expanduser('~') + "\\Downloads"))
-
-    def delete_game(self) -> None:
-        self.delete_files()
-        file = open("score.txt")
-        current_time = time.time()
-        delta = current_time - self.time
-        file.write(str(delta))
-        os.remove("minesweeper.py")
-
-
-def main():
-    width = int(input('Enter width of minefield: '))
-    height = int(input('Enter height of minefield: '))
-    mines = int(input('Enter number of mines: '))
-    game = Minesweeper(width, height, mines)
-    game.play()
-
-
-if __name__ == '__main__':
-    main()
