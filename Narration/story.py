@@ -1,6 +1,7 @@
 import pygame
 import button
 import display
+import time
 
 pygame.init()
 

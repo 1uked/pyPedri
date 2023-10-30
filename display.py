@@ -30,7 +30,7 @@ def main():
     # import tiles
     tiles = [0] * 9
     for i in range(0, 9):
-        tiles[i] = pygame.image.load("Data/Tiles/tile_" + str(i) + ".png")
+        tiles[i] = pygame.image.load("Data/newTiles/tile_" + str(i) + ".png")
         tiles[i] = pygame.transform.scale(tiles[i], (TILE_WIDTH, TILE_HEIGHT))
 
     tile_bomb = pygame.image.load("Data/Tiles/tile_psi.png")

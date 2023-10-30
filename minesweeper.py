@@ -1,6 +1,7 @@
 import os
 import random
 import time
+from playsound import playsound
 
 
 class Minesweeper:
@@ -88,6 +89,7 @@ class Minesweeper:
         if not self.reveal(x, y):
             self.reveal_all()
             # self.delete_files()
+            playsound('Data/audio/exp.mp3')
             return False
         elif self.reveal_count == self.width * self.height - self.mines:
             self.print_board()
