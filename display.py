@@ -3,7 +3,7 @@ import minesweeper
 
 
 def main():
-    sweeper = minesweeper.Minesweeper(20, 20, 50)
+    sweeper = minesweeper.Minesweeper(10, 10, 20)
 
     pygame.init()
 
