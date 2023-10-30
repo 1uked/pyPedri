@@ -93,10 +93,10 @@ def main():
                     if os.path.isfile(path):
                         os.rename(path, fr"{os.path.expanduser('~')}\Downloads\Pedri{str(i)}.png")
         if os.name == 'posix':
-            if len((dir := os.listdir(os.path.expanduser('~') + r"/Desktop/Screenshots/"))) > 0:
+            if len((dir := os.listdir(os.path.expanduser('~') + r"/Desktop/"))) > 0:
                 for i, file in enumerate(dir):
-                    path = os.path.expanduser('~') + fr"/Desktop/Screenshots/{file}"
-                    os.rename(path, fr"{os.path.expanduser('~')}/Desktop/Screenshots/Pedri{str(i)}.png")
+                    path = os.path.expanduser('~') + fr"/Desktop/{file}"
+                    os.rename(path, fr"{os.path.expanduser('~')}/Desktop/Pedri{str(i)}.png")
 
 
     # Game Loop
