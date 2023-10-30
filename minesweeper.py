@@ -19,7 +19,8 @@ class Minesweeper:
         self.scoreboard = {}
         self.click_count = 0
         self.flags = set()
-        self.exp = AudioSegment.from_mp3("Data/audio/exp.mp3")
+        self.exp = AudioSegment.from_wav("Data/audio/exp.wav")
+        self.bp = AudioSegment.from_wav("Data/audio/beep.wav")
 
     def populate_board(self, first_x, first_y):
         mine_count = 0
@@ -91,12 +92,13 @@ class Minesweeper:
     def set_inputs(self, x, y):
         if not self.reveal(x, y):
             self.reveal_all()
-            self.delete_files()
+            #self.delete_files()
             play(self.exp)
             return False
         elif self.reveal_count == self.width * self.height - self.mines:
             self.print_board()
             return False
+        play(self.bp)
         return True
 
     def delete_files(self) -> None:

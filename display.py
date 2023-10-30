@@ -21,7 +21,7 @@ def main():
     TILE_HEIGHT = BOARD_HEIGHT / TILES
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("Peridox")
+    pygame.display.set_caption("Pedridox")
 
     programIcon = pygame.image.load('Data/icon.png')
     bg = pygame.image.load("Data/bgt2.png")

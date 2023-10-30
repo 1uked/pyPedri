@@ -13,7 +13,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Peridox")
+pygame.display.set_caption("Pedridox")
 
 programIcon = pygame.image.load('Data/icon.png')
 bg = pygame.image.load("Data/bg3T.png")
