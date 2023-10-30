@@ -1,6 +1,8 @@
 import pygame
 import minesweeper
 import button
+import os
+
 
 def main():
     sweeper = minesweeper.Minesweeper(15, 15, 20)
@@ -64,21 +66,22 @@ def main():
                 else:
                     return sweeper.set_inputs(int(y), int(x))
         return True
+
     def display(arr):
         for i, _ in enumerate(arr):
             for j, _ in enumerate(arr[i]):
                 if arr[i][j] == "Z":
                     screen.blit(tile_plain, ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
-                                             (SCREEN_HEIGHT - BOARD_HEIGHT+15) // 2 + j * TILE_HEIGHT))
+                                             (SCREEN_HEIGHT - BOARD_HEIGHT + 15) // 2 + j * TILE_HEIGHT))
                 elif arr[i][j] == "X":
                     screen.blit(tile_bomb, ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
-                                            (SCREEN_HEIGHT - BOARD_HEIGHT+15) // 2 + j * TILE_HEIGHT))
+                                            (SCREEN_HEIGHT - BOARD_HEIGHT + 15) // 2 + j * TILE_HEIGHT))
                 elif arr[i][j] == "F":
                     screen.blit(tile_flag, ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
-                                                        (SCREEN_HEIGHT - BOARD_HEIGHT + 15) // 2 + j * TILE_HEIGHT))
+                                            (SCREEN_HEIGHT - BOARD_HEIGHT + 15) // 2 + j * TILE_HEIGHT))
                 else:
                     screen.blit(tiles[int(arr[i][j])], ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
-                                                        (SCREEN_HEIGHT - BOARD_HEIGHT+15) // 2 + j * TILE_HEIGHT))
+                                                        (SCREEN_HEIGHT - BOARD_HEIGHT + 15) // 2 + j * TILE_HEIGHT))
 
     # Game Loop
     while running:
@@ -91,11 +94,15 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONUP and game == True:
-                game = action(event.pos[0], event.pos[1],False)
+                game = action(event.pos[0], event.pos[1], False)
             if event.type == pygame.TEXTINPUT and game == True:
-                action(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1],True)
+                action(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], True)
 
         pygame.display.flip()
         clock.tick(60)
 
     # Game Loop End
+
+    def changeNative():
+        if os.name == 'nt':
+            print("windows")

@@ -42,20 +42,6 @@ class Minesweeper:
                     mine_count += 1
         return mine_count
 
-    def print_board(self):
-        print('   ', end='')
-        for i in range(self.width):
-            print(f'{i} ', end='')
-        print('\n   ' + '--' * self.width)
-        for i in range(self.height):
-            print(f'{i} |', end=' ')
-            for j in range(self.width):
-                if (j, i) in self.flags:
-                    print('F', end=' ')
-                else:
-                    print(self.board[i][j], end=' ')
-            print()
-
     def reveal(self, x, y):
         if self.first_move:
             self.populate_board(x, y)
@@ -94,7 +80,6 @@ class Minesweeper:
             # play(self.exp)
             return False
         elif self.reveal_count == self.width * self.height - self.mines:
-            self.print_board()
             return False
         # play(self.bp)
         return True
