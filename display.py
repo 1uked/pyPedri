@@ -25,7 +25,7 @@ def main():
 
     programIcon = pygame.image.load('Data/icon.png')
     bg = pygame.image.load("Data/bgt2.png")
-    fg = pygame.image.load("Data/fg.png")
+    fg = pygame.image.load("Data/fg2.png")
 
     # import tiles
     tiles = [0] * 9

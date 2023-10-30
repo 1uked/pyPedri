@@ -16,7 +16,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Peridox")
 
 programIcon = pygame.image.load('Data/icon.png')
-bg = pygame.image.load("Data/bg3.png")
+bg = pygame.image.load("Data/bg3T.png")
 
 bg = pygame.transform.scale(bg,(SCREEN_WIDTH,SCREEN_HEIGHT))
 
@@ -34,10 +34,10 @@ start_button = button.Button(400, 200, start_img, 0.5)
 
 def load(screen):
   WIDTH = 20
-  pygame.draw.rect(screen, "black", pygame.Rect(400-WIDTH*5, 500, 200, 30), 2)
+  pygame.draw.rect(screen, "black", pygame.Rect(400-WIDTH*5, 280, 200, 30), 5)
   for i in trange(WIDTH):
     time.sleep(0.1)
-    pygame.draw.rect(screen, "black", pygame.Rect(400-5*i, 500, 10*i, 30))
+    pygame.draw.rect(screen, "black", pygame.Rect(400-5*i, 280, 10*i, 30))
     pygame.display.flip()
   pygame.mouse.set_pos(10, 10)
 
