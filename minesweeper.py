@@ -78,15 +78,19 @@ class Minesweeper:
             return True
         return False
 
+    def reveal_all(self):
+        for y in range(self.height):
+            for x in range(self.width):
+                if self.hidden_board[y][x] == 'X':
+                    self.board[y][x] = 'X'
+
     def set_inputs(self, x, y):
         if not self.reveal(x, y):
-            self.print_board()
+            self.reveal_all()
             self.delete_files()
-            print('Game over! You hit a mine!')
             return False
         elif self.reveal_count == self.width * self.height - self.mines:
             self.print_board()
-            print('Congratulations! You cleared the minefield!')
             return False
         return True
 
