@@ -39,6 +39,7 @@ def load(screen):
     time.sleep(0.1)
     pygame.draw.rect(screen, "black", pygame.Rect(400-5*i, 500, 10*i, 30))
     pygame.display.flip()
+  pygame.mouse.set_pos(10, 10)
 
 # Game Loop
 
@@ -46,7 +47,7 @@ while running:
   screen.blit(bg, (0, 0))
 
   if start_button.draw(screen):
-    #load(screen)
+    load(screen)
     display.main()
     running = False
 

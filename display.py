@@ -3,7 +3,7 @@ import minesweeper
 
 
 def main():
-    sweeper = minesweeper.Minesweeper(10, 10, 20)
+    sweeper = minesweeper.Minesweeper(15, 15, 20)
 
     pygame.init()
 
@@ -24,7 +24,7 @@ def main():
     pygame.display.set_caption("Peridox")
 
     programIcon = pygame.image.load('Data/icon.png')
-    bg = pygame.image.load("Data/bg.png")
+    bg = pygame.image.load("Data/bgt2.png")
     fg = pygame.image.load("Data/fg.png")
 
     # import tiles
@@ -74,7 +74,6 @@ def main():
                                                         (SCREEN_HEIGHT - BOARD_HEIGHT) // 2 + j * TILE_HEIGHT))
 
     # Game Loop
-    pygame.mouse.set_pos(10, 10)
     while running:
         screen.blit(bg, (0, 0))
 
