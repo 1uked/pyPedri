@@ -18,7 +18,6 @@ class Minesweeper:
         self.time = time.time()
         self.scoreboard = {}
         self.click_count = 0
-        self.flags = set()
         # self.exp = AudioSegment.from_wav("Data/audio/exp.wav")
         # self.bp = AudioSegment.from_wav("Data/audio/beep.wav")
 
@@ -63,22 +62,22 @@ class Minesweeper:
             self.first_move = False
         if self.hidden_board[y][x] == 'X':
             return False
-        elif self.board[y][x] == 'Z':
+        elif self.board[y][x] == 'Z' or self.board[y][x] == 'F':
             self.board[y][x] = self.hidden_board[y][x]
             self.reveal_count += 1
             if self.board[y][x] == '0':
                 for i in range(max(0, y - 1), min(self.height, y + 2)):
                     for j in range(max(0, x - 1), min(self.width, x + 2)):
-                        if self.board[i][j] == 'Z':
+                        if self.board[i][j] == 'Z' or self.board[i][j] == 'F':
                             self.reveal(j, i)
         return True
 
     def set_flag(self, x, y):
         if self.board[y][x] == 'Z':
-            if (x, y) in self.flags:
-                self.flags.remove((x, y))
-            else:
-                self.flags.add((x, y))
+            self.board[y][x] = 'F'
+            return True
+        elif self.board[y][x] == 'F':
+            self.board[y][x] = 'Z'
             return True
         return False
 

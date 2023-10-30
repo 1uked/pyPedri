@@ -1,6 +1,6 @@
 import pygame
 import minesweeper
-
+import button
 
 def main():
     sweeper = minesweeper.Minesweeper(15, 15, 20)
@@ -35,7 +35,7 @@ def main():
 
     tile_bomb = pygame.image.load("Data/Tiles/tile_psi.png")
     tile_plain = pygame.image.load("Data/Tiles/tile_plain.png")
-    tile_flag = pygame.image.load("Data/Tiles/tile_flag_.png")
+    tile_flag = pygame.image.load("Data/Tiles/tile_flag_w.png")
 
     tile_bomb = pygame.transform.scale(tile_bomb, (TILE_WIDTH, TILE_HEIGHT))
     tile_plain = pygame.transform.scale(tile_plain, (TILE_WIDTH, TILE_HEIGHT))
@@ -47,31 +47,38 @@ def main():
     pygame.display.set_icon(programIcon)
 
     running = True
+    game = True
     clock = pygame.time.Clock()
 
     # create window end
 
-    def action(x, y):
+    def action(x, y, flag):
         xbuffer = (SCREEN_WIDTH - BOARD_WIDTH) // 2
         ybuffer = (SCREEN_HEIGHT - BOARD_HEIGHT) // 2
         if xbuffer < x < SCREEN_WIDTH - xbuffer:
             if ybuffer < y < SCREEN_HEIGHT - ybuffer:
                 x = (x - xbuffer) // TILE_WIDTH
                 y = (y - ybuffer) // TILE_HEIGHT
-                return sweeper.set_inputs(int(y), int(x))
+                if flag:
+                    sweeper.set_flag(int(y), int(x))
+                else:
+                    return sweeper.set_inputs(int(y), int(x))
         return True
     def display(arr):
         for i, _ in enumerate(arr):
             for j, _ in enumerate(arr[i]):
                 if arr[i][j] == "Z":
                     screen.blit(tile_plain, ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
-                                             (SCREEN_HEIGHT - BOARD_HEIGHT) // 2 + j * TILE_HEIGHT))
+                                             (SCREEN_HEIGHT - BOARD_HEIGHT+15) // 2 + j * TILE_HEIGHT))
                 elif arr[i][j] == "X":
                     screen.blit(tile_bomb, ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
-                                            (SCREEN_HEIGHT - BOARD_HEIGHT) // 2 + j * TILE_HEIGHT))
+                                            (SCREEN_HEIGHT - BOARD_HEIGHT+15) // 2 + j * TILE_HEIGHT))
+                elif arr[i][j] == "F":
+                    screen.blit(tile_flag, ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
+                                                        (SCREEN_HEIGHT - BOARD_HEIGHT + 15) // 2 + j * TILE_HEIGHT))
                 else:
                     screen.blit(tiles[int(arr[i][j])], ((SCREEN_WIDTH - BOARD_WIDTH) // 2 + i * TILE_WIDTH,
-                                                        (SCREEN_HEIGHT - BOARD_HEIGHT) // 2 + j * TILE_HEIGHT))
+                                                        (SCREEN_HEIGHT - BOARD_HEIGHT+15) // 2 + j * TILE_HEIGHT))
 
     # Game Loop
     while running:
@@ -83,12 +90,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.MOUSEBUTTONUP:
-                running = action(event.pos[0], event.pos[1])
+            if event.type == pygame.MOUSEBUTTONUP and game == True:
+                game = action(event.pos[0], event.pos[1],False)
+            if event.type == pygame.TEXTINPUT and game == True:
+                action(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1],True)
 
         pygame.display.flip()
         clock.tick(60)
 
     # Game Loop End
-
-    pygame.quit()
