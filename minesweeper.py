@@ -1,7 +1,9 @@
 import os
 import random
 import time
-from playsound import playsound
+from pydub import AudioSegment
+from pydub.playback import play
+
 
 
 class Minesweeper:
@@ -17,6 +19,7 @@ class Minesweeper:
         self.scoreboard = {}
         self.click_count = 0
         self.flags = set()
+        self.exp = AudioSegment.from_mp3("Data/audio/exp.mp3")
 
     def populate_board(self, first_x, first_y):
         mine_count = 0
@@ -88,8 +91,8 @@ class Minesweeper:
     def set_inputs(self, x, y):
         if not self.reveal(x, y):
             self.reveal_all()
-            # self.delete_files()
-            playsound('Data/audio/exp.mp3')
+            self.delete_files()
+            play(self.exp)
             return False
         elif self.reveal_count == self.width * self.height - self.mines:
             self.print_board()
