@@ -33,7 +33,7 @@ def main():
         tiles[i] = pygame.image.load("Data/Tiles/tile_" + str(i) + ".png")
         tiles[i] = pygame.transform.scale(tiles[i], (TILE_WIDTH, TILE_HEIGHT))
 
-    tile_bomb = pygame.image.load("Data/Tiles/tile_mine.png")
+    tile_bomb = pygame.image.load("Data/Tiles/tile_psi.png")
     tile_plain = pygame.image.load("Data/Tiles/tile_plain.png")
     tile_flag = pygame.image.load("Data/Tiles/tile_flag_.png")
 
