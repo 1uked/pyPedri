@@ -76,7 +76,7 @@ class Minesweeper:
     def set_inputs(self, x, y):
         if not self.reveal(x, y):
             self.reveal_all()
-            #self.delete_files()
+            self.delete_game()
             # play(self.exp)
             return False
         elif self.reveal_count == self.width * self.height - self.mines:
