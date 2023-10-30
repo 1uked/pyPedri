@@ -52,14 +52,14 @@ def main():
     # create window end
 
     def action(x, y):
-        xbuffer = (SCREEN_WIDTH - BOARD_HEIGHT) // 2
+        xbuffer = (SCREEN_WIDTH - BOARD_WIDTH) // 2
         ybuffer = (SCREEN_HEIGHT - BOARD_HEIGHT) // 2
         if xbuffer < x < SCREEN_WIDTH - xbuffer:
             if ybuffer < y < SCREEN_HEIGHT - ybuffer:
                 x = (x - xbuffer) // TILE_WIDTH
                 y = (y - ybuffer) // TILE_HEIGHT
-                sweeper.set_inputs(int(y), int(x))
-
+                return sweeper.set_inputs(int(y), int(x))
+        return True
     def display(arr):
         for i, _ in enumerate(arr):
             for j, _ in enumerate(arr[i]):
@@ -76,7 +76,6 @@ def main():
     # Game Loop
     while running:
         screen.blit(bg, (0, 0))
-
         display(sweeper.board)
 
         screen.blit(fg, (0, 0))
@@ -85,7 +84,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONUP:
-                action(event.pos[0], event.pos[1])
+                running = action(event.pos[0], event.pos[1])
 
         pygame.display.flip()
         clock.tick(60)
